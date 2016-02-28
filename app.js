@@ -7,6 +7,7 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Navigator,
 } from 'react-native';
 
 import {Router, Route} from './react-native-router'
@@ -17,12 +18,26 @@ import MissionList from './components/mission/list'
 
 import NavBar from './components/navbar'
 
+const items = [
+  {name: "companies", title: "Companies", onPress: (router) => {
+    router.replace( {name: "companies"} )
+  }},
+  {name: "people", title: "People", onPress: (router) => {
+    router.replace({name: "people"})
+  }},
+  {name: "missions", title: "Missions", onPress: (router) => {
+    router.replace({name: "missions"})
+  }},
+]
+
+const TimetrackMenu = (props) => {return <NavBar {...props} items={items}/>}
+
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Router>
-          <NavBar />
+          <TimetrackMenu />
           <Route name="companies" component={CompanyList}/>
           <Route name="people" component={PersonList}/>
           <Route name="missions" component={MissionList}/>

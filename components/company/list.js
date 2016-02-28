@@ -1,4 +1,12 @@
-import React, {Text} from 'react-native'
+import React, {Text, View} from 'react-native'
 
 export default () =>
-  <Text>LIST COMPANIES</Text>
+  <View style={styles.list}>
+    <Text>LIST COMPANIES</Text>
+  </View>
+
+const styles = {
+    list: {
+      flex: 0.9
+    }
+}

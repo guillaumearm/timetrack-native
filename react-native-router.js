@@ -1,6 +1,8 @@
 
 import React, {
+  cloneElement,
   Navigator,
+  View,
 } from 'react-native';
 
 const ConsoleWarn = (props) => {
@@ -16,8 +18,11 @@ export const Router = (props) => {
   if (props.renderScene !== undefined)
     return <ConsoleWarn>Router Error: renderScene props forbidden</ConsoleWarn>
   if (!children) return <ConsoleWarn>Router Error: no routes.</ConsoleWarn>
-  if (!Array.isArray(children)) { children = [children] }
-  if (!initialRoute)            initialRoute = { name: children[0].props.name }
+  if (!Array.isArray(children)) children = [children]
+
+  const routes = children.filter(r => r.type === <Route/>.type)
+
+  if (!initialRoute) initialRoute = { name: routes[0].props.name }
 
   return (
     <Navigator
@@ -32,8 +37,12 @@ export const Router = (props) => {
         if (!routeElement.props.component)
           return <ConsoleWarn>Router Error: route component not found</ConsoleWarn>
 
-        const Target = routeElement.props.component
-        return <Target route={route} router={router}>Hello, it works</Target>
+        let i = 0
+        return children
+          .filter(x => x.type !== <Route/>.type || x.props.name === route.name)
+          .map(x => (x.type === <Route/>.type) ? (
+              <x.props.component key="currentRoute" route={route} router={router} />
+            ) : (cloneElement(x, {route, router, key: ++i})))
       }}
     />
   )

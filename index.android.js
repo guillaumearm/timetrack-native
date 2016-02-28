@@ -23,25 +23,20 @@ const Third = ({route: {name}, router}) => <Text>Hello, I'm {name}</Text>
 
 class timetrack extends Component {
   render() {
-    return <Menu/>
-    /*
     return (
-      <View style={styles.container}>
         <Router>
           <Route name="first" component={First}/>
           <Route name="second" component={Second}/>
           <Route name="third" component={Third}/>
         </Router>
-      </View>
     )
-    */
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#41c2ec',
   },
   welcome: {
     fontSize: 20,

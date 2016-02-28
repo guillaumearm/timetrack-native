@@ -18,16 +18,28 @@ import MissionList from './components/mission/list'
 
 import NavBar from './components/navbar'
 
-const items = [
-  {name: "companies", title: "Companies", onPress: (router) => {
-    router.replace( {name: "companies"} )
-  }},
-  {name: "people", title: "People", onPress: (router) => {
-    router.replace({name: "people"})
-  }},
-  {name: "missions", title: "Missions", onPress: (router) => {
-    router.replace({name: "missions"})
-  }},
+const menuItems = [
+  {
+    name: "companies",
+    title: "Companies",
+    onPress: (router) => {
+      router.replace( {name: "companies"} )
+    }
+  },
+  {
+    name: "people",
+    title: "People",
+    onPress: (router) => {
+      router.replace({name: "people"})
+    }
+  },
+    {
+      name: "missions",
+      title: "Missions",
+      onPress: (router) => {
+        router.replace({name: "missions"})
+    }
+  },
 ]
 
 export class App extends Component {
@@ -38,7 +50,7 @@ export class App extends Component {
           <Route name="companies" component={CompanyList}/>
           <Route name="people" component={PersonList}/>
           <Route name="missions" component={MissionList}/>
-          <NavBar items={items} />
+          <NavBar items={menuItems} />
         </Router>
       </View>
     )

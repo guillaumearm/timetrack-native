@@ -1,9 +1,11 @@
-import React, {Component, Text, View, TouchableHighlight} from 'react-native'
+import React, {Component, PropTypes, Text, View, TouchableHighlight} from 'react-native'
+import {ConsoleWarn} from './widgets'
 
 const Touch = TouchableHighlight
 
 class NavBar extends Component {
   componentWillMount() {
+    if (!this.props.route || !this.props.router) return
     this.setState({items : this.props.items.map((x, i) => {
       return {
         id: i,
@@ -14,13 +16,15 @@ class NavBar extends Component {
           this.setState({items: this.state.items.map(y => {
             return (i === y.id) ? ({...y, selected: true}) : ({...y, selected: false})
           })})
-          if (!selected) x.onPress(this.props.router)
+          if (!selected && x.onPress) x.onPress(this.props.router)
         }
       }
     })})
   }
 
   render() {
+    if (!this.props.route || !this.props.router)
+      return <ConsoleWarn>NavBar Error: must be a child Router</ConsoleWarn>
     const elements = this.state.items.map(x => {
       return (
         <Touch key={x.id} onPress={x.onPress}>
@@ -37,6 +41,14 @@ class NavBar extends Component {
       </View>
     )
   }
+}
+
+NavBar.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name:     PropTypes.string.isRequired,
+    title:    PropTypes.string,
+    onPress:  PropTypes.func,
+  })).isRequired,
 }
 
 export default NavBar

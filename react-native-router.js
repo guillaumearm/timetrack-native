@@ -14,7 +14,7 @@ const ConsoleWarn = (props) => {
 export const Route = (props) => <View {...props} />
 
 export const Router = (props) => {
-  let {children, initialRoute} = props
+  let {children, initialRoute, initialRouteStack} = props
 
   if (props.renderScene !== undefined)
     return <ConsoleWarn>Router Error: renderScene props forbidden</ConsoleWarn>
@@ -23,13 +23,15 @@ export const Router = (props) => {
 
   const routes = children.filter(r => r.type === <Route/>.type)
 
-  if (!initialRoute) initialRoute = { name: routes[0].props.name }
+  if (!initialRoute && !initialRouteStack) initialRoute = { name: routes[0].props.name }
+  if (initialRoute) initialRouteStack = [initialRoute]
 
   return (
     <View style={{flex: 1}}>
       <Navigator
         {...props}
-        initialRoute={initialRoute}
+        initialRoute={undefined}
+        initialRouteStack={initialRouteStack}
         renderScene={(route, router) => {
           if (!route) return <ConsoleWarn>Router Error: no initial route has set</ConsoleWarn>
           if (!route.name) return <ConsoleWarn>Router Error: route has no name</ConsoleWarn>

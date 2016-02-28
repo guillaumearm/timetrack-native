@@ -30,17 +30,15 @@ const items = [
   }},
 ]
 
-const TimetrackMenu = (props) => {return <NavBar {...props} items={items}/>}
-
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Router>
-          <TimetrackMenu />
           <Route name="companies" component={CompanyList}/>
           <Route name="people" component={PersonList}/>
           <Route name="missions" component={MissionList}/>
+          <NavBar items={items} />
         </Router>
       </View>
     )

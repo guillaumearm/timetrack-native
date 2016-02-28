@@ -41,7 +41,7 @@ export const Router = (props) => {
         return children
           .filter(x => x.type !== <Route/>.type || x.props.name === route.name)
           .map(x => (x.type === <Route/>.type) ? (
-              <x.props.component key="currentRoute" route={route} router={router} />
+              <x.props.component key={++i} route={{...x.props, ...route, component: undefined}} router={router} />
             ) : (cloneElement(x, {route, router, key: ++i})))
       }}
     />

@@ -15,20 +15,23 @@ import React, {
 import {Error} from './components/widgets'
 import {Router, Route} from './react-native-router'
 
-const Menu = (props) => <Text>MENU</Text>
+const NavBar = (props) => <Text>MENU</Text>
 
-const First = ({route: {name}, router}) => <Text>Hello, I'm {name}</Text>
+const First = ({route: {name, test}, router}) => <Text>Hello, I'm {name} {test}</Text>
 const Second = ({route: {name, test}, router}) => <Text>Hello, I'm {name} {test}</Text>
-const Third = ({route: {name}, router}) => <Text>Hello, I'm {name}</Text>
+const Third = ({route: {name, test}, router}) => <Text>Hello, I'm {name} {test}</Text>
 
 class timetrack extends Component {
   render() {
     return (
+      <View style={styles.container}>
+        <NavBar />
         <Router>
           <Route name="first" component={First}/>
           <Route name="second" component={Second}/>
           <Route name="third" component={Third}/>
         </Router>
+      </View>
     )
   }
 }
@@ -36,7 +39,7 @@ class timetrack extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#41c2ec',
+    backgroundColor: '#dfdfdf',
   },
   welcome: {
     fontSize: 20,

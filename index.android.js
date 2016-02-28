@@ -8,32 +8,39 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native';
+
+import {Error} from './components/widgets'
+import {Router, Route} from './react-native-router'
+
+const Menu = (props) => <Text>MENU</Text>
+
+const First = ({route: {name}, router}) => <Text>Hello, I'm {name}</Text>
+const Second = ({route: {name, test}, router}) => <Text>Hello, I'm {name} {test}</Text>
+const Third = ({route: {name}, router}) => <Text>Hello, I'm {name}</Text>
 
 class timetrack extends Component {
   render() {
+    return <Menu/>
+    /*
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <Router>
+          <Route name="first" component={First}/>
+          <Route name="second" component={Second}/>
+          <Route name="third" component={Third}/>
+        </Router>
       </View>
-    );
+    )
+    */
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {

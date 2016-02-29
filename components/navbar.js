@@ -58,7 +58,7 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    flex: 0.08,
+    flex: 0.1,
     backgroundColor: 'black',
   },
   element: {
@@ -69,6 +69,7 @@ const styles = {
     padding: 22,
   },
   text: {
+    fontSize: 16,
     color: "white",
   }
 }

@@ -2,7 +2,7 @@ import React, {Text, View} from 'react-native'
 
 export default () =>
   <View style={styles.list}>
-    <Text>LIST MISSIONS</Text>
+    <Text style={{color: "rgb(42,42,42)", fontSize: 42, alignSelf: "center"}}>MISSIONS</Text>
   </View>
 
 const styles = {

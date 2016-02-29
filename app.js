@@ -42,10 +42,19 @@ const menuItems = [
   },
 ]
 
+const Header = (props) => {
+  return (
+    <View style={{flex: 0.05, backgroundColor: "black"}}>
+      <Text style={{fontSize: 20, alignSelf: "center", color: "white"}}>Timetrack by redpelicans</Text>
+    </View>
+  )
+}
+
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header/>
         <Router>
           <Route name="companies" component={CompanyList}/>
           <Route name="people" component={PersonList}/>
@@ -60,6 +69,6 @@ export class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dfdfdf',
+    backgroundColor: 'rgb(232, 232, 232)',
   },
 });

@@ -44,8 +44,8 @@ const menuItems = [
 
 const Header = (props) => {
   return (
-    <View style={{flex: 0.05, backgroundColor: "black"}}>
-      <Text style={{fontSize: 20, alignSelf: "center", color: "white"}}>Timetrack by redpelicans</Text>
+    <View style={{padding: 10, height: 40, backgroundColor: "black"}}>
+      <Text style={{fontSize: 18, alignSelf: "center", color: "white"}}>Timetrack by redpelicans</Text>
     </View>
   )
 }

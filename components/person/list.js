@@ -1,12 +1,8 @@
-import React, {Text, View} from 'react-native'
+import React from 'react-native'
+import {List} from '../widgets'
 
-export default () =>
-  <View style={styles.list}>
-    <Text style={{color: "rgb(42,42,42)", fontSize: 42, alignSelf: "center"}}>PEOPLE</Text>
-  </View>
+const companies = require('../../data/people')
 
-const styles = {
-    list: {
-      flex: 0.9
-    }
+export default () => {
+  return <List entities={companies} toString={(x) => x.firstName + " " + x.lastName}/>
 }

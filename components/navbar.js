@@ -1,3 +1,4 @@
+/* @flow */
 import React, {Component, PropTypes, Text, View, TouchableHighlight} from 'react-native'
 import {ConsoleWarn} from './widgets'
 

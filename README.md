@@ -1,48 +1,22 @@
-# React Native 0.2 and Babel 6 Boilerplate (Android)
+# Timetrack on react-native
 
 ***********************
 
 Installation
----------------
-- download boilerplate
-- remove .git folder
-- install boilerplate
+------------------
+
+- Make sure have params folder with google-services.json and timetrack.keystore
+- For security reasons, the params foler is ignored by git. So, don't push this files on the remote
+- Make sure have a ~/.gradle/gradle.properties correctly configured ( [see here](https://facebook.github.io/react-native/docs/signed-apk-android.html#content) )
+
 ```sh
-git clone https://github.com/guillaumearm/react-native-android-boilerplate myApp
-cd myApp
-rm -rf .git
 npm install
 ```
 
-- Change your app name in `package.json` (name field), then :
+
+Generate APK
+-------------------
+- Simply run :
 ```sh
-npm run native-init
-```
-
-**************************
-Run app
----------
-Start the packager
-```sh
-npm start
-```
-
-Launch app on your android device
---------
-If app is not running yet on your device:
-```sh
-npm run android
-```
-
-***************
-
-Rename your app
----------------
-- Change your app name in `package.json` (name field)
-- Change your AppRegistry in `index.android.js`
-
-then
-
-```sh
-npm run native-rename
+npm run make-apk
 ```

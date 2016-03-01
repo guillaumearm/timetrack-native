@@ -12,8 +12,9 @@ import {Router, Route} from './react-native-router'
 import CompanyList from './components/company/list'
 import PersonList from './components/person/list'
 import MissionList from './components/mission/list'
-
 import NavBar from './components/navbar'
+
+//import {GoogleSigninButton} from 'react-native-google-signin'
 
 const menuItems = [
   {
@@ -51,13 +52,6 @@ export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header/>
-        <Router>
-          <Route name="companies" component={CompanyList}/>
-          <Route name="people" component={PersonList}/>
-          <Route name="missions" component={MissionList}/>
-          <NavBar items={menuItems} />
-        </Router>
       </View>
     )
   }

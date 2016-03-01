@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "clean": "cd android && ./gradlew clean && cd ..",
     "make-apk": "cd android && ./gradlew assembleRelease && mv ./app/build/outputs/apk/app-release.apk ../app.apk && echo done",
     "android": "adb reverse tcp:8081 tcp:8081 ; react-native run-android",
     "start": "npm run cleanCache && node node_modules/react-native/local-cli/cli.js start",

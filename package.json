@@ -4,14 +4,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "clean": "cd android && ./gradlew clean && cd ..",
+    "clean": "cd android && ./gradlew clean && rm -rf build && rm -rf app/build && cd ..",
     "make-apk": "cd android && ./gradlew assembleRelease && mv ./app/build/outputs/apk/app-release.apk ../app.apk && echo done",
+    "remake-apk": "npm run clean && npm run make-apk",
     "android": "adb reverse tcp:8081 tcp:8081 ; react-native run-android",
     "start": "npm run cleanCache && node node_modules/react-native/local-cli/cli.js start",
     "cleanCache": "rm -rf $TMPDIR/react-*",
     "native-init": "react-native upgrade && react-native android",
     "native-rename": "rm -rf ios android ; mv index.android.js .index.android.js.tmp 2> /dev/null || true ; react-native upgrade && react-native android ; mv .index.android.js.tmp index.android.js 2> /dev/null || true",
-    "postinstall": "rm -f node_modules/.bin/react-native"
+    "postinstall": "rm -f node_modules/.bin/react-native",
+    "show-debug-key": "echo ------ Default passowrd is : android ------ && keytool -list -v -keystore ~/.android/debug.keystore",
+    "show-timetrack-key": "keytool -list -v -keystore params/timetrack.keystore"
   },
   "dependencies": {
     "react-native": "^0.20.0",

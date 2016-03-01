@@ -7,7 +7,7 @@ import React, {
   Navigator,
 } from 'react-native';
 
-const webClientId = "538845155711-gu68cg2a5o4c4dve7pt82behu1ijtefm.apps.googleusercontent.com"
+const webClientId = "538845155711-be2jo7f82ecrenk57oirsafbtt25detf.apps.googleusercontent.com"
 
 // Routes
 import {Router, Route} from './react-native-router'

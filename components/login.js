@@ -25,7 +25,7 @@ export class LoginButton extends Component {
       this.setState({user: user})
     })
     .catch(err => {
-      console.warn("ERROR LOGIN")
+      console.warn(err)
     })
     .done()
   }
@@ -33,6 +33,7 @@ export class LoginButton extends Component {
   _logout() {
     GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut())
     .then(() => {
+      console.warn("LOGOUT !")
       this.setState({user: null})
     })
     .done()
@@ -49,7 +50,7 @@ export class LoginButton extends Component {
             style={{width: 312, height: 48}}
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Dark}
-            onPress={this._login}
+            onPress={() => {this._login()}}
           />
         </View>
       )

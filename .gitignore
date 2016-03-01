@@ -35,5 +35,5 @@ node_modules/
 npm-debug.log
 
 ## Others
-params/
+params/*.keystore
 app.apk

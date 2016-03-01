@@ -7,38 +7,18 @@ import React, {
   Navigator,
 } from 'react-native';
 
-import {Router, Route} from './react-native-router'
+const webClientId = "538845155711-gu68cg2a5o4c4dve7pt82behu1ijtefm.apps.googleusercontent.com"
 
+// Routes
+import {Router, Route} from './react-native-router'
 import CompanyList from './components/company/list'
 import PersonList from './components/person/list'
 import MissionList from './components/mission/list'
-import NavBar from './components/navbar'
 
-//import {GoogleSigninButton} from 'react-native-google-signin'
+import {Menu} from './components/menu'
 
-const menuItems = [
-  {
-    name: "companies",
-    title: "Companies",
-    onPress: (router) => {
-      router.replace( {name: "companies"} )
-    }
-  },
-  {
-    name: "people",
-    title: "People",
-    onPress: (router) => {
-      router.replace({name: "people"})
-    }
-  },
-    {
-      name: "missions",
-      title: "Missions",
-      onPress: (router) => {
-        router.replace({name: "missions"})
-    }
-  },
-]
+import {LoginButton} from './components/login'
+
 
 const Header = (props) => {
   return (
@@ -48,10 +28,24 @@ const Header = (props) => {
   )
 }
 
+const Title = (props) => {
+  return (
+    <View style={{marginBottom: 22, marginTop: 22, alignItems: "center"}}>
+      <Text style={{fontSize: 32, color: "black"}}>{props.children}</Text>
+    </View>
+  )
+}
+
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header />
+        <Title>Authentification</Title>
+        <LoginButton
+          webClientId={webClientId} />
+        <View style={{alignItems: "center"}}>
+        </View>
       </View>
     )
   }

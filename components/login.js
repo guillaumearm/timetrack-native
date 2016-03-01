@@ -1,19 +1,22 @@
-import React, {Component, PropTypes, Text, View} from 'react-native'
+import React, {Component, PropTypes, Text, View, TouchableHighlight} from 'react-native'
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin'
+
+const Touch = TouchableHighlight
 
 export class LoginButton extends Component {
   static propTypes = {
     webClientId: PropTypes.string.isRequired,
+    offlineAccess: PropTypes.bool,
   };
 
-  state = {user: null};
+  state = {};
 
   componentDidMount(){
     GoogleSignin.configure({
       webClientId: this.props.webClientId,
+      offlineAccess: this.props.offlineAccess
     })
     GoogleSignin.currentUserAsync().then(user => {
-      console.warn('USER: ', user)
       this.setState({user: user})
     }).done()
   }
@@ -21,11 +24,9 @@ export class LoginButton extends Component {
   _login() {
     GoogleSignin.signIn()
     .then(user => {
-      console.warn("LOGIN: ", user)
       this.setState({user: user})
     })
     .catch(err => {
-      console.warn(err)
     })
     .done()
   }
@@ -33,7 +34,6 @@ export class LoginButton extends Component {
   _logout() {
     GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut())
     .then(() => {
-      console.warn("LOGOUT !")
       this.setState({user: null})
     })
     .done()
@@ -41,9 +41,16 @@ export class LoginButton extends Component {
 
   render(){
     if (this.state.user) {
-      return (<Text>Hello {this.state.user.name}</Text>)
+      return (
+        <View style={{alignItems: "center"}}>
+          <Text>Hello {this.state.user.name}</Text>
+          <Touch underlayColor="white" onPress={() => {this._logout()}}>
+            <Text style={{fontSize: 22}}>Logout</Text>
+          </Touch>
+        </View>
+      )
     }
-    else {
+    else if (this.state.user === null) {
       return (
         <View style={{alignItems: "center"}}>
           <GoogleSigninButton
@@ -53,6 +60,11 @@ export class LoginButton extends Component {
             onPress={() => {this._login()}}
           />
         </View>
+      )
+    }
+    else {
+      return (
+        <Text>Loading...</Text>
       )
     }
   }

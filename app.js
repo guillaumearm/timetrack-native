@@ -43,7 +43,7 @@ export class App extends Component {
         <Header />
         <Title>Authentification</Title>
         <LoginButton
-          webClientId={webClientId} />
+          webClientId={webClientId} offlineAccess={true} />
         <View style={{alignItems: "center"}}>
         </View>
       </View>

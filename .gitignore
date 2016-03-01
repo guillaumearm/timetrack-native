@@ -2,7 +2,6 @@
 #
 .DS_Store
 
-params/
 
 # Xcode
 #
@@ -34,3 +33,7 @@ local.properties
 #
 node_modules/
 npm-debug.log
+
+## Others
+params/
+app.apk

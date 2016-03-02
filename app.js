@@ -40,39 +40,41 @@ const Title = (props) => {
 class QueryTimetrackServer extends Component {
 state = {};
 
+componentDidMount() {
+  const {id_token} = this.props.user
+  const options = {
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({id_token})
+  };
+
+  fetch('http://rp3.redpelicans.com:5004/login', options)
+  .then(res => {
+    console.warn("HERE");
+    return res.text()
+  })
+  .then(res => {
+    this.setState({user: res})
+    console.warn("OK: ", res);
+  })
+  .catch(err => {
+    console.warn("ERROR: ", err)
+  })
+}
+
 render() {
     const {user} = this.props
     const id_token = user.idToken
     console.warn(user);
-
-    const options = {
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({id_token})
-    };
-
-    fetch('http://rp3.redpelicans.com:5004/login', options)
-    .then(res => {
-      console.warn("HERE");
-      return res.text()
-    })
-    .then(res => {
-      this.setState({user: res})
-      console.warn("OK: ", res);
-    })
-    .catch(err => {
-      console.warn("ERROR: ", err)
-    })
-    console.log(user);
 
     if (this.state.user){
       return (
         <Text>Congratulations, you are logged on redpelicans timetrack server</Text>
       )
     }
-
+    
     return (
       <View>
         <Text>Hello {user.name}</Text>

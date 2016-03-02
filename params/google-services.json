@@ -1,63 +1,10 @@
 {
   "project_info": {
-    "project_id": "timetrack-1237",
-    "project_number": "538845155711",
-    "name": "Timetrack"
+    "project_id": "42",
+    "project_number": "42",
+    "name": "App"
   },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:538845155711:android:e02a6717c4d82f18",
-        "client_id": "android:com.timetrack",
-        "client_type": 1,
-        "android_client_info": {
-          "package_name": "com.timetrack"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1013003508849-oeb5d0f8hd2hkqv6k8e5a264pf4c6bsp.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.timetrack",
-            "certificate_hash": "E9B369C48DA2D57088537768866E617D59750B87"
-          }
-        },
-        {
-          "client_id": "1013003508849-uejutev2dj76qopsqhknc4mm3u4em4l1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.timetrack",
-            "certificate_hash": "32C5D3B4C6727D1740E4D324F4E99AAF5FAFF941"
-          }
-        },
-        {
-          "client_id": "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "cloud_messaging_service": {
-          "status": 1,
-          "apns_config": []
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "google_signin_service": {
-          "status": 2
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    }
-  ],
+  "client": [],
   "client_info": [],
   "ARTIFACT_VERSION": "1"
 }

@@ -41,7 +41,7 @@ class QueryTimetrackServer extends Component {
 state = {};
 
 componentDidMount() {
-  const {id_token} = this.props.user
+  const id_token = this.props.user.idToken
   const options = {
     method: 'POST',
     headers:{
@@ -56,8 +56,9 @@ componentDidMount() {
     return res.text()
   })
   .then(res => {
-    this.setState({user: res})
-    console.warn("OK: ", res);
+    const user = JSON.parse(res).user
+    this.setState({user})
+    console.warn("OK: ", user)
   })
   .catch(err => {
     console.warn("ERROR: ", err)
@@ -74,7 +75,7 @@ render() {
         <Text>Congratulations, you are logged on redpelicans timetrack server</Text>
       )
     }
-    
+
     return (
       <View>
         <Text>Hello {user.name}</Text>

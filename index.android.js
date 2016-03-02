@@ -13,4 +13,4 @@ import {App} from './app'
 class timetrack extends Component {
   render() {return <App/>}
 }
-AppRegistry.registerComponent('timetrack', () => timetrack)
+AppRegistry.registerComponent('ReactNativeApp', () => timetrack)

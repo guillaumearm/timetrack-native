@@ -1,4 +1,4 @@
-rootProject.name = 'timetrack'
+rootProject.name = 'RNApp'
 
 include ':app'
 include ':react-native-google-signin', ':app'

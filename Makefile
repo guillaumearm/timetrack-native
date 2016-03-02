@@ -24,17 +24,13 @@ help:
 	@echo "\t clean \t\t\t\t Apply clean-apk and clean-cache rules."
 	@echo "\t clean-all \t\t\t Apply clean-apk, clean-cache and uninstall-all-apk rules."
 	@echo
-	@echo " --------- GRADLE PROJECT -----------"
-	@echo "\t native-init \t\t\t init boilerplate (package.json name field is used for project name)."
-	@echo "\t native-rename \t\t\t rename boilerplate (package.json name fiels id used for project name)."
-	@echo
 	@echo " --------- ANDROID KEYS -----------"
 	@echo "\t gen-apk \t\t\t generate apk release keystore. (using KEY_ALIAS environment variable)"
 	@echo "\t show-debug-key \t\t show key informations about your debug keystore."
 	@echo "\t show-release-key \t\t show key informations about your release keystore."
 	@echo
 	@echo " --------- DEVELOPMENT -----------"
-	@echo "\t dev \t\t\t\t Start the react-native dev packager server."
+	@echo "\t dev \t\t\t\t Start the react-native dev server packager."
 	@echo "\t run-android \t\t\t Install and launch app on your device (debug mode)."
 	@echo
 	@echo " --------- DEBUG -----------"
@@ -56,6 +52,7 @@ help:
 	@echo
 
 clean: clean-cache clean-apk
+	@echo --- clean done.
 
 clean-apk:
 	@echo --- Delete app.apk
@@ -75,60 +72,63 @@ clean-cache:
 clean-all: clean-cache clean-apk uninstall-all-apk
 	@echo --- clean-all done.
 
-native-init:
-	@react-native upgrade && react-native android
-	@echo --- native-init done.
-
-native-rename:
-	@$(RM) -r ios android ; mv index.android.js .index.android.js.tmp 2> /dev/null || true
-	react-native upgrade && react-native android
-	mv .index.android.js.tmp index.android.js 2> /dev/null || true
-	@echo --- native-rename done.
-
 gen-apk:
 	@echo --- gen-apk done.
 
 show-debug-key:
 	@echo --- Default password is : android && keytool -list -v -keystore ~/.android/debug.keystore
+	@echo --- show-debug-key done.
 
 show-release-key:
 	@keytool -list -v -keystore params/release.keystore
+	@echo --- show-release-key done.
 
 dev: clean-cache
+	@echo --- Starting react-native server packager...
 	@$(NODE) $(NODEFLAGS) ./node_modules/react-native/local-cli/cli.js start
+	@echo --- dev done.
 
-run-android:
-	@echo "--- Building and running app on your device..."
+run-android: uninstall-all-apk
+	@echo --- Building and running app on your device...
 	@react-native run-android
+	@echo --- run-android done.
 
 build-debug-apk:
+	@echo --- Build debug app...
 	@$(GRADLE) assembleDebug
 	@$(CP) android/app/build/outputs/apk/app-debug.apk app.apk
 	@echo --- build-debug-apk done.
 
 rebuild-debug-apk: clean-apk build-debug-apk
+	@echo --- rebuild-debug-apk done.
 
 install-debug-apk: uninstall-all-apk
+	@echo --- Install debug app...
 	@$(GRADLE) installDebug
 	@echo --- install-debug-apk done.
 
 uninstall-debug-apk:
+	@echo --- Uninstall debug app...
 	@$(GRADLE) uninstallDebug
 	@echo --- uninstall-debug-apk done.
 
 
 build-release-apk:
+	@echo --- Build release app...
 	@$(GRADLE) assembleRelease
 	@$(CP) android/app/build/outputs/apk/app-release.apk app.apk
 	@echo --- build-release-apk done.
 
 rebuild-release-apk: clean-apk build-release-apk
+	@echo --- rebuild-release-apk done.
 
 install-release-apk: uninstall-all-apk
+	@echo --- Install release app...
 	@$(GRADLE) installRelease
 	@echo --- install-release-apk done.
 
 uninstall-release-apk:
+	@echo --- Uninstall release app...
 	@$(GRADLE) uninstallRelease
 	@echo --- uninstall-release-apk done.
 
@@ -151,5 +151,6 @@ configure-debug-android:
 run-android-then-configure: run-android
 	@echo --- Waiting 10 seconds...
 	@sleep 10 && $(MAKE) configure-debug-android
+	@echo --- run-android-then-configure done.
 
 PHONY: help clean-apk clean clean-cache clean-all native-init native-rename gen-apk show-debug-key dev run-android build-debug-apk rebuild-debug-apk install-debug-apk uninstall-debug-apk build-release-apk rebuild-release-apk install-release-apk uninstall-release-apk uninstall-all-apk configure-debug-android run-android-then-configure

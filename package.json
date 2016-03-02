@@ -4,17 +4,30 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "clean": "cd android && ./gradlew clean && rm -rf build && rm -rf app/build && cd ..",
-    "cleanCache": "rm -rf $TMPDIR/react-*",
-    "make-apk": "cd android && ./gradlew assembleRelease && mv ./app/build/outputs/apk/app-release.apk ../app.apk && echo done",
-    "remake-apk": "npm run clean && npm run make-apk",
-    "android": "react-native run-android",
-    "start": "npm run cleanCache && node node_modules/react-native/local-cli/cli.js start",
+    "clean": "rm -f app.apk && cd android && ./gradlew clean && rm -rf build && rm -rf app/build && cd ..",
+    "clean-cache": "rm -rf $TMPDIR/react-*",
+    "clean-all": "npm run clean-cache && npm run clean && npm run uninstall-all-apk",
+
+    "build-debug-apk": "cd android && ./gradlew assembleDebug && cp ./app/build/outputs/apk/app-debug.apk ../app.apk && echo done",
+    "rebuild-debug-apk": "npm run clean && npm run build-debug-apk",
+    "build-release-apk": "cd android && ./gradlew assembleRelease && cp ./app/build/outputs/apk/app-release.apk ../app.apk && echo done",
+    "rebuild-release-apk": "npm run clean && npm run build-release-apk",
+
+    "install-debug-apk": "npm run uninstall-all-apk && cd android && ./gradlew installDebug && cd ..",
+    "install-release-apk": "npm run uninstakk-all-apk && cd android && ./gradlew installRelease && cd ..",
+
+    "uninstall-debug-apk": "cd android && ./gradlew uninstallDebug && cd ..",
+    "uninstall-release-apk": "cd android && ./gradlew uninstallRelease && cd ..",
+    "uninstall-all-apk": "cd android && ./gradlew uninstallAll && cd ..",
+
     "native-init": "react-native upgrade && react-native android",
+    "start": "npm run clean-cache && node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
     "native-rename": "rm -rf ios android ; mv index.android.js .index.android.js.tmp 2> /dev/null || true ; react-native upgrade && react-native android ; mv .index.android.js.tmp index.android.js 2> /dev/null || true",
     "postinstall": "rm -f node_modules/.bin/react-native",
+
     "show-debug-key": "echo ------ Default passowrd is : android ------ && keytool -list -v -keystore ~/.android/debug.keystore",
-    "show-timetrack-key": "keytool -list -v -keystore params/timetrack.keystore"
+    "show-release-key": "keytool -list -v -keystore params/release.keystore"
   },
   "dependencies": {
     "react-native": "^0.20.0",

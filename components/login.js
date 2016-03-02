@@ -1,4 +1,4 @@
-import React, {Component, PropTypes, Text, View, TouchableHighlight} from 'react-native'
+import React, {cloneElement, Component, PropTypes, Text, View, TouchableHighlight} from 'react-native'
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin'
 
 const Touch = TouchableHighlight
@@ -7,6 +7,7 @@ export class LoginButton extends Component {
   static propTypes = {
     webClientId: PropTypes.string.isRequired,
     offlineAccess: PropTypes.bool,
+    children: PropTypes.element,
   };
 
   state = {};
@@ -27,6 +28,7 @@ export class LoginButton extends Component {
       this.setState({user: user})
     })
     .catch(err => {
+      console.warn(err)
     })
     .done()
   }
@@ -43,10 +45,10 @@ export class LoginButton extends Component {
     if (this.state.user) {
       return (
         <View style={{alignItems: "center"}}>
-          <Text>Hello {this.state.user.name}</Text>
           <Touch underlayColor="white" onPress={() => {this._logout()}}>
             <Text style={{fontSize: 22}}>Logout</Text>
           </Touch>
+          {cloneElement(this.props.children, {user: this.state.user})}
         </View>
       )
     }

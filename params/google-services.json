@@ -16,7 +16,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "538845155711-3kvsv53u6hblrktt7kq5ge84s9ma92v4.apps.googleusercontent.com",
+          "client_id": "1013003508849-oeb5d0f8hd2hkqv6k8e5a264pf4c6bsp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.timetrack",
@@ -24,7 +24,7 @@
           }
         },
         {
-          "client_id": "538845155711-961j3255akjumc38e1a7u52g3mi60e8i.apps.googleusercontent.com",
+          "client_id": "1013003508849-uejutev2dj76qopsqhknc4mm3u4em4l1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.timetrack",
@@ -33,6 +33,10 @@
         },
         {
           "client_id": "538845155711-be2jo7f82ecrenk57oirsafbtt25detf.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

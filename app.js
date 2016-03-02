@@ -7,7 +7,8 @@ import React, {
   Navigator,
 } from 'react-native';
 
-const webClientId = "538845155711-be2jo7f82ecrenk57oirsafbtt25detf.apps.googleusercontent.com"
+//const webClientId = "538845155711-be2jo7f82ecrenk57oirsafbtt25detf.apps.googleusercontent.com"
+const webClientId = "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com"
 
 // Routes
 import {Router, Route} from './react-native-router'
@@ -36,14 +37,60 @@ const Title = (props) => {
   )
 }
 
+class QueryTimetrackServer extends Component {
+state = {};
+
+render() {
+    const {user} = this.props
+    const id_token = user.idToken
+    console.warn(user);
+
+    const options = {
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id_token})
+    };
+
+    fetch('http://rp3.redpelicans.com:5004/login', options)
+    .then(res => {
+      console.warn("HERE");
+      return res.text()
+    })
+    .then(res => {
+      this.setState({user: res})
+      console.warn("OK: ", res);
+    })
+    .catch(err => {
+      console.warn("ERROR: ", err)
+    })
+    console.log(user);
+
+    if (this.state.user){
+      return (
+        <Text>Congratulations, you are logged on redpelicans timetrack server</Text>
+      )
+    }
+
+    return (
+      <View>
+        <Text>Hello {user.name}</Text>
+        <Text>server id token :  {user.idToken}</Text>
+      </View>
+    )
+  }
+}
+
 export class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Header />
         <Title>Authentification</Title>
-        <LoginButton
-          webClientId={webClientId} offlineAccess={true} />
+        <LoginButton webClientId={webClientId}>
+          <QueryTimetrackServer/>
+        </LoginButton>
         <View style={{alignItems: "center"}}>
         </View>
       </View>

@@ -10,7 +10,4 @@ import React, {
 
 import {App} from './app'
 
-class timetrack extends Component {
-  render() {return <App/>}
-}
-AppRegistry.registerComponent('ReactNativeApp', () => timetrack)
+AppRegistry.registerComponent('ReactNativeApp', () => App)

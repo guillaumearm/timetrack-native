@@ -14,7 +14,7 @@
     "rebuild-release-apk": "npm run clean && npm run build-release-apk",
 
     "install-debug-apk": "npm run uninstall-all-apk && cd android && ./gradlew installDebug && cd ..",
-    "install-release-apk": "npm run uninstakk-all-apk && cd android && ./gradlew installRelease && cd ..",
+    "install-release-apk": "npm run uninstall-all-apk && cd android && ./gradlew installRelease && cd ..",
 
     "uninstall-debug-apk": "cd android && ./gradlew uninstallDebug && cd ..",
     "uninstall-release-apk": "cd android && ./gradlew uninstallRelease && cd ..",

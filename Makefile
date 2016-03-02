@@ -98,6 +98,7 @@ dev: clean-cache
 	@$(NODE) $(NODEFLAGS) ./node_modules/react-native/local-cli/cli.js start
 
 run-android:
+	@echo "--- Building and running app on your device..."
 	@react-native run-android
 
 build-debug-apk:

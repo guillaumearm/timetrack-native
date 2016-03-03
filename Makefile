@@ -2,10 +2,11 @@
 #### react-native-android-boilerplate Helper #######
 ####################################################
 
-CP=cp
-NODE=node
-GRADLE=cd android && ./gradlew
 ################################################################################
+### PROGRAMS ###
+CP := cp
+NODE := node
+GRADLE := cd android && ./gradlew
 
 ### RULES ###
 help:
@@ -13,7 +14,7 @@ help:
 	@echo "------ react-native-android-boilerplate Helper ------"
 	@echo "-----------------------------------------------------"
 	@echo "User Environments variables :"
-	@echo "\t KEY_ALIAS (used by gen-apk rule): $(KEY_ALIAS)"
+	@echo "\t KEY_ALIAS (used by gen-apk-key rule): $(KEY_ALIAS)"
 	@echo "\t DEBUG_IP (used by configure-debug-android rule): $(DEBUG_IP)"
 	@echo
 	@echo "Rules :"
@@ -25,7 +26,7 @@ help:
 	@echo "\t clean-all \t\t\t Apply clean-apk, clean-cache and uninstall-all-apk rules."
 	@echo
 	@echo " --------- ANDROID KEYS -----------"
-	@echo "\t gen-apk \t\t\t generate apk release keystore. (using KEY_ALIAS environment variable)"
+	@echo "\t gen-apk-key \t\t\t generate apk release keystore. (using KEY_ALIAS environment variable)"
 	@echo "\t show-debug-key \t\t show key informations about your debug keystore."
 	@echo "\t show-release-key \t\t show key informations about your release keystore."
 	@echo
@@ -72,8 +73,15 @@ clean-cache:
 clean-all: clean-cache clean-apk uninstall-all-apk
 	@echo --- clean-all done.
 
-gen-apk:
-	@echo --- gen-apk done.
+gen-apk-key:
+	@if [ -f "params/release.keystore" ] ; then \
+		echo --- ERROR: for regenerate keystore, remove params/release.keystore && false \
+	; fi
+	@if [ "$(KEY_ALIAS)" == "" ] ; then \
+		echo --- ERROR: must have a KEY_ALIAS environment variable && false\
+	; fi
+	@keytool -genkey -v -keystore params/release.keystore -alias $(KEY_ALIAS) -keyalg RSA -keysize 2048 -validity 10000
+	@echo --- gen-apk-key done.
 
 show-debug-key:
 	@echo --- Default password is : android && keytool -list -v -keystore ~/.android/debug.keystore
@@ -153,4 +161,4 @@ run-android-then-configure: run-android
 	@sleep 10 && $(MAKE) configure-debug-android
 	@echo --- run-android-then-configure done.
 
-PHONY: help clean-apk clean clean-cache clean-all native-init native-rename gen-apk show-debug-key dev run-android build-debug-apk rebuild-debug-apk install-debug-apk uninstall-debug-apk build-release-apk rebuild-release-apk install-release-apk uninstall-release-apk uninstall-all-apk configure-debug-android run-android-then-configure
+PHONY: help clean-apk clean clean-cache clean-all native-init native-rename gen-apk-key show-debug-key dev run-android build-debug-apk rebuild-debug-apk install-debug-apk uninstall-debug-apk build-release-apk rebuild-release-apk install-release-apk uninstall-release-apk uninstall-all-apk configure-debug-android run-android-then-configure

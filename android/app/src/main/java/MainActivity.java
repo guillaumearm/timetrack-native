@@ -1,4 +1,4 @@
-package com.timetrack;
+package com.redpelicans.timetrack;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;

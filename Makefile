@@ -141,6 +141,7 @@ uninstall-release-apk:
 	@echo --- uninstall-release-apk done.
 
 uninstall-all-apk:
+	@echo --- Uninstall all app...
 	@$(GRADLE) uninstallAll
 	@echo --- uninstall-all-apk done.
 

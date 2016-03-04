@@ -1,28 +1,20 @@
 {
-  "name": "timetrack-native",
-  "description": "timetrack mobile (react-native 0.20.0)",
+  "name": "timetrack",
+  "description": "",
   "version": "0.0.2",
-
-  "author": "Guillaume ARM <guillaume.arm@redpelicans.com>",
-  "license": "MIT",
-
   "private": true,
-
   "scripts": {
-    "start": "make dev",
-    "android": "make run-android",
-    "postinstall": "rm -f node_modules/.bin/react-native"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android"
   },
-
   "dependencies": {
     "react-native": "^0.20.0",
-    "react-native-google-signin": "^0.4.1"
+    "react-native-google-signin": "github:guillaumearm/react-native-google-signin"
   },
-
   "devDependencies": {
     "babel": "^6.5.2",
-    "babel-core": "^6.5.2",
-    "babel-preset-react-native": "^1.4.0",
+    "babel-core": "^6.6.4",
+    "babel-preset-react-native": "^1.5.0",
     "babel-preset-stage-0": "^6.5.0"
   }
 }

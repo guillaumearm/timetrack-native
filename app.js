@@ -36,7 +36,6 @@ const Title = (props) => {
   )
 }
 
-
 export class App extends Component {
   render() {
     return (

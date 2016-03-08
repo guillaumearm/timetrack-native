@@ -5,7 +5,10 @@ import React, {
   Text,
   View,
   Navigator,
+  TouchableHighlight,
 } from 'react-native';
+
+const Touch = TouchableHighlight
 
 const webClientId = "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com"
 
@@ -18,6 +21,8 @@ import MissionList from './components/mission/list'
 import {Menu} from './components/menu'
 
 import {LoginTimetrack} from './components/login'
+
+import {Avatar, Icon, Image} from 'react-native-material-design'
 
 
 const Header = (props) => {
@@ -36,20 +41,57 @@ const Title = (props) => {
   )
 }
 
+const Loading = () => <Text>Loading...</Text>
+
 export class App extends Component {
+  state = {};
+
   render() {
+    const {logged, error} = this.state
+    const loginButton = (
+        <LoginTimetrack
+          webClientId={webClientId}
+          onTimetrackError={(err) => { console.warn("TIMETRACK ERROR: " + err) }}
+          onSuccess={(user, logout) => {
+            if (!user) {
+              console.warn("Error: User is not authorized.")
+              this.setState({error: true, logged: true, logout})
+            }
+            else {
+              this.setState({logged: true, logout, user, error: false})
+            }
+          }}
+          RenderLoading={Loading}
+        />
+    )
+    const logoutButton = (
+      <Touch
+        underlayColor="rgb(93, 125, 196)"
+        onPress={() => {
+          if (this.state.logout)
+            this.state.logout()
+          this.setState({logged: false, logout: undefined, user: undefined})
+        }}
+      >
+        <Text style={{fontSize: 20}}>Logout</Text>
+      </Touch>
+    )
+    const errorMsg = (
+      <View>
+        <Text>ERROR</Text>
+      </View>
+    )
+
+    const none = <View/>
+
     return (
       <View style={styles.container}>
         <Header />
         <Title>Authentification</Title>
-        <LoginTimetrack
-          webClientId={webClientId}
-          onGoogleError={(err) => { console.warn(err) }}
-          onTimetrackError={(err) => { console.warn("TIMETRACK ERROR: " + err) }}
-          onSuccess={(user, logout) => { console.warn("OK") }}
-          RenderLoading={ () => <Text>Loading...</Text> }
-        />
         <View style={{alignItems: "center"}}>
+          <Avatar size={100} text="GA" backgroundColor="paperBlue" />
+          {!logged ? loginButton : logoutButton}
+          {error ? errorMsg : none}
         </View>
       </View>
     )

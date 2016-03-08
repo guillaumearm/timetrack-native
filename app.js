@@ -17,7 +17,7 @@ import MissionList from './components/mission/list'
 
 import {Menu} from './components/menu'
 
-import {LoginButton} from './components/login'
+import {LoginTimetrack} from './components/login'
 
 
 const Header = (props) => {
@@ -36,53 +36,6 @@ const Title = (props) => {
   )
 }
 
-class QueryTimetrackServer extends Component {
-state = {};
-
-componentDidMount() {
-  const id_token = this.props.user.idToken
-  const options = {
-    method: 'POST',
-    headers:{
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({id_token})
-  };
-
-  fetch('http://rp3.redpelicans.com:5004/login', options)
-  .then(res => {
-    console.warn("HERE");
-    return res.text()
-  })
-  .then(res => {
-    const user = JSON.parse(res).user
-    this.setState({user})
-    console.warn("OK: ", user)
-  })
-  .catch(err => {
-    console.warn("ERROR: ", err)
-  })
-}
-
-render() {
-    const {user} = this.props
-    const id_token = user.idToken
-    console.warn(user);
-
-    if (this.state.user){
-      return (
-        <Text>Congratulations, you are logged on redpelicans timetrack server</Text>
-      )
-    }
-
-    return (
-      <View>
-        <Text>Hello {user.name}</Text>
-        <Text>server id token :  {user.idToken}</Text>
-      </View>
-    )
-  }
-}
 
 export class App extends Component {
   render() {
@@ -90,9 +43,13 @@ export class App extends Component {
       <View style={styles.container}>
         <Header />
         <Title>Authentification</Title>
-        <LoginButton webClientId={webClientId}>
-          <QueryTimetrackServer/>
-        </LoginButton>
+        <LoginTimetrack
+          webClientId={webClientId}
+          onGoogleError={(err) => { console.warn(err) }}
+          onTimetrackError={(err) => { console.warn("TIMETRACK ERROR: " + err) }}
+          onSuccess={(user, logout) => { console.warn("OK") }}
+          RenderLoading={ () => <Text>Loading...</Text> }
+        />
         <View style={{alignItems: "center"}}>
         </View>
       </View>

@@ -8,22 +8,19 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
+import { Avatar, Icon, Image } from 'react-native-material-design'
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
+
 const Touch = TouchableHighlight
 
 const webClientId = "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com"
 
 // Routes
 import {Router, Route} from './react-native-router'
-import CompanyList from './components/company/list'
-import PersonList from './components/person/list'
-import MissionList from './components/mission/list'
 
 import {Menu} from './components/menu'
-
 import {LoginTimetrack} from './components/login'
-
-import {Avatar, Icon, Image} from 'react-native-material-design'
-
 
 const Header = (props) => {
   return (
@@ -42,6 +39,9 @@ const Title = (props) => {
 }
 
 const Loading = () => <Text>Loading...</Text>
+
+
+
 
 export class App extends Component {
   state = {};
@@ -85,15 +85,17 @@ export class App extends Component {
     const none = <View/>
 
     return (
-      <View style={styles.container}>
-        <Header />
-        <Title>Authentification</Title>
-        <View style={{alignItems: "center"}}>
-          <Avatar size={100} text="GA" backgroundColor="paperBlue" />
-          {!logged ? loginButton : logoutButton}
-          {error ? errorMsg : none}
+      <Provider store={configureStore()}>
+        <View style={styles.container}>
+          <Header />
+          <Title>Authentification</Title>
+          <View style={{alignItems: "center"}}>
+            <Avatar size={100} text="GA" backgroundColor="paperBlue" />
+            {!logged ? loginButton : logoutButton}
+            {error ? errorMsg : none}
+          </View>
         </View>
-      </View>
+      </Provider>
     )
   }
 }

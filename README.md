@@ -65,7 +65,7 @@ make run-android
 
 ### Building release
 #### Get private release.keystore and passwords
-- Send a mail to guillaumearm@redpelicans.com to ask him for the release.keystore and gradle.properties files.
+- Send a mail to guillaumearm[at]redpelicans.com to ask him for the release.keystore and gradle.properties files.
 
 - Build apk running :
 ```

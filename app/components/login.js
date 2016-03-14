@@ -51,7 +51,7 @@ export class LoginTimetrack extends Component {
       body: JSON.stringify({id_token: token})
     }
 
-    fetch('http://rp3.redpelicans.com:7011/login', options)
+    fetch('http://rp3.redpelicans.com:5004/login', options)
     .then(res => res.text())
     .then(res => {
       const user = JSON.parse(res).user

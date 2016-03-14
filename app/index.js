@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 
 import { Avatar, Icon, Image } from 'react-native-material-design'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import configureStore from './store/configureStore'
 
 const Touch = TouchableHighlight
@@ -17,7 +17,7 @@ const Touch = TouchableHighlight
 const webClientId = "1013003508849-ke0dsjttftqcl0ee3jl7nv7av9iuij8p.apps.googleusercontent.com"
 
 // Routes
-import {Router, Route} from './react-native-router'
+import {Actions, Router, Route} from 'react-native-redux-router'
 
 import {Menu} from './components/menu'
 import {LoginTimetrack} from './components/login'
@@ -40,13 +40,33 @@ const Title = (props) => {
 
 const Loading = () => <Text>Loading...</Text>
 
+const Hello = () => {
 
+  return (
+    <View>
+      <Touch onPress={Actions.loading}>
+        <Text>Press me</Text>
+      </Touch>
+    </View>
+  )
+}
 
 
 export class App extends Component {
   state = {};
 
   render() {
+    return (
+      <Provider store={configureStore()}>
+        <Router>
+          <Route initial={true} component={connect()(Hello)} name="default" />
+          <Route component={connect()(Loading)} name="loading" />
+        </Router>
+      </Provider>
+    )
+  }
+    /*
+  render() {}
     const {logged, error} = this.state
     const loginButton = (
         <LoginTimetrack
@@ -98,6 +118,7 @@ export class App extends Component {
       </Provider>
     )
   }
+  */
 }
 
 const styles = StyleSheet.create({
